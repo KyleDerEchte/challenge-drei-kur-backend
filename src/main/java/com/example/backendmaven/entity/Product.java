@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,31 +16,36 @@ import java.util.Set;
 public class Product {
 
     @Id
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "product_type")
     @ManyToOne
+    @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
-    @Column(name = "size", nullable = false)
+    @Column(name = "size")
     private String size;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @JoinColumn(name = "material_type", nullable = false)
-    @OneToMany(targetEntity = MaterialType.class)
-    private Set<MaterialType> materialType;
+    @ManyToMany
+    @JoinTable(
+            name = "product_material_type",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "material_type_id")
+    )
+    private List<MaterialType> materialType;
 
-    @Column(name = "costs_without_vat", nullable = false)
+    @Column(name = "costs_without_vat")
     private double costs;
 
-    @Column(name = "price_without_vat", nullable = false)
+    @Column(name = "price_without_vat")
     private double price;
 
-    @JoinColumn(name = "color", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "material_color_id")
     private MaterialColor color;
 
 }

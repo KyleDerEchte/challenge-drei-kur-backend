@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class MaterialColor {
 
     @Id
+    @Column(name = "material_color_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

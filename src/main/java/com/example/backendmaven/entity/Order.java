@@ -6,28 +6,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class Order {
 
     @Id
+    @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "order_details", nullable = false)
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<OrderDetail> orderDetails;
 
-    @JoinColumn(name = "customer", nullable = false)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<OrderDetail> orderDetails;
+
+
     @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @Column(name = "order_date", nullable = false)
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
 
 }

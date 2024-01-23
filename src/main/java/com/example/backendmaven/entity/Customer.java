@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "customer")
 public class Customer {
     @Id
+    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,8 +22,9 @@ public class Customer {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @JoinColumn(name = "address", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
 

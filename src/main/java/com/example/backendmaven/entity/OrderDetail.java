@@ -13,17 +13,18 @@ import lombok.NoArgsConstructor;
 public class OrderDetail {
 
     @Id
+    @Column(name = "order_detail_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Orders orders;
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private Long amount;
 }

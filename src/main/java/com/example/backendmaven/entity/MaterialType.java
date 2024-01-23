@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class MaterialType {
 
     @Id
+    @Column(name = "material_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

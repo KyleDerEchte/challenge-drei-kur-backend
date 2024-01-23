@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Address {
 
     @Id
+    @Column(name = "address_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
