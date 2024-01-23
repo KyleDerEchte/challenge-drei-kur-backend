@@ -1,14 +1,15 @@
 package com.example.backendmaven.service;
 
-import com.example.backendmaven.repository.HoodieRepository;
+import com.example.backendmaven.repository.TShirtRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HoodieService {
+public class TShirtService {
 
 
-    private final HoodieRepository hoodieRepository;
+    private final TShirtRepository tShirtRepository;
+
 }
