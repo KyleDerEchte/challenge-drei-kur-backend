@@ -1,6 +1,6 @@
-package com.example.backendmaven.repository;
+package de.nein.backend.repository;
 
-import com.example.backendmaven.entity.Product;
+import de.nein.backend.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

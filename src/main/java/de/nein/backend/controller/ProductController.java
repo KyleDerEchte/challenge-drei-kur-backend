@@ -1,7 +1,7 @@
-package com.example.backendmaven.controller;
+package de.nein.backend.controller;
 
-import com.example.backendmaven.entity.Product;
-import com.example.backendmaven.service.ProductService;
+import de.nein.backend.entity.Product;
+import de.nein.backend.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

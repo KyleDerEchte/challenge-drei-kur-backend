@@ -1,10 +1,10 @@
-package com.example.backendmaven;
+package de.nein.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendMavenApplicationTests {
+class NeinBackendApplicationTests {
 
     @Test
     void contextLoads() {

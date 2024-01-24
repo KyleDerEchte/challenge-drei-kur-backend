@@ -1,4 +1,4 @@
-package com.example.backendmaven.entity;
+package de.nein.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "order_fulfillment")
-public class OrderFulfillment {
+@Table(name = "product_type")
+public class ProductType {
 
     @Id
-    @Column(name = "oder_fulfillment_id")
+    @Column(name = "product_type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "name", nullable = false)
+    private String name;
 }

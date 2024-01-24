@@ -1,7 +1,7 @@
-package com.example.backendmaven.service;
+package de.nein.backend.service;
 
-import com.example.backendmaven.entity.Order;
-import com.example.backendmaven.repository.OrderRepository;
+import de.nein.backend.entity.Order;
+import de.nein.backend.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

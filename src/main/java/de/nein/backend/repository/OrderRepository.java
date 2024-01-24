@@ -1,6 +1,6 @@
-package com.example.backendmaven.repository;
+package de.nein.backend.repository;
 
-import com.example.backendmaven.entity.Order;
+import de.nein.backend.entity.Order;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

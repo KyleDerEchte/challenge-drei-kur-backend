@@ -8,11 +8,11 @@
         <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>backendMaven</artifactId>
+    <groupId>de.nein</groupId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>backendMaven</name>
-    <description>backendMaven</description>
+    <name>backend</name>
+    <description>nein.backend</description>
     <properties>
         <java.version>17</java.version>
     </properties>

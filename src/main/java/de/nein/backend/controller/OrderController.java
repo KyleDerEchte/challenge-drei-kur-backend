@@ -1,11 +1,10 @@
-package com.example.backendmaven.controller;
+package de.nein.backend.controller;
 
-import com.example.backendmaven.entity.Order;
-import com.example.backendmaven.service.OrderService;
+import de.nein.backend.entity.Order;
+import de.nein.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

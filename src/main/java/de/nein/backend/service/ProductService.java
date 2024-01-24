@@ -1,7 +1,7 @@
-package com.example.backendmaven.service;
+package de.nein.backend.service;
 
-import com.example.backendmaven.entity.Product;
-import com.example.backendmaven.repository.ProductRepository;
+import de.nein.backend.entity.Product;
+import de.nein.backend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

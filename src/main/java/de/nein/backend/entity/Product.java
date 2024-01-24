@@ -1,4 +1,4 @@
-package com.example.backendmaven.entity;
+package de.nein.backend.entity;
 
 
 import jakarta.persistence.*;
