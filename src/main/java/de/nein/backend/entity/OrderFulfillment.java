@@ -13,10 +13,11 @@ import lombok.NoArgsConstructor;
 public class OrderFulfillment {
 
     @Id
-    @Column(name = "oder_fulfillment_id")
+    @Column(name = "order_fulfillment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description")
     private String description;
+
 }

@@ -32,4 +32,11 @@ public class Order {
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_fulfillment_id")
+    private OrderFulfillment orderFulfillment;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
 }
