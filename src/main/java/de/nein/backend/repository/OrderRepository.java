@@ -2,14 +2,9 @@ package de.nein.backend.repository;
 
 import de.nein.backend.entity.Order;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface OrderRepository extends CrudRepository<Order,Long> {
-    List<Order> findAll();
-
-    List<Order> findOrdersByCustomer_Id(long id);
-
-
+@Repository
+public interface OrderRepository extends CrudRepository<Order, Long> {
 
 }

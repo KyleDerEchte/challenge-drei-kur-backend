@@ -1,27 +1,31 @@
 package de.nein.backend.service;
 
+import de.nein.backend.dto.CustomerDTO;
+import de.nein.backend.entity.Address;
 import de.nein.backend.entity.Customer;
 import de.nein.backend.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final AddressService addressService;
 
-    public Optional<Customer> getCustomerById(long id) {
-        final Customer customer = this.customerRepository.findCustomersById(id);
-        if (customer == null) {
-            return Optional.empty();
+
+    public Customer convertToEntity(CustomerDTO customerDTO) {
+        Customer customer = new Customer();
+        customer.setId(customerDTO.getId());
+        customer.setForename(customerDTO.getForename());
+        customer.setSurname(customerDTO.getSurname());
+        if (customerDTO.getAddress() != null) {
+            Address address = addressService.convertToEntity(customerDTO.getAddress());
+            customer.setAddress(address);
         }
-        //return Optional.of(customer); due to no login the frontend cannot deliver a customerId
-        return Optional.empty();
+        return customer;
     }
-
 
     public void saveCustomer(Customer customer) {
         this.customerRepository.save(customer);

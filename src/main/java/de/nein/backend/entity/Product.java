@@ -20,7 +20,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_type_id")
     private ProductType productType;
 
@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "product_material_type",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -44,7 +44,7 @@ public class Product {
     @Column(name = "price_without_vat")
     private double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "material_color_id")
     private MaterialColor color;
 

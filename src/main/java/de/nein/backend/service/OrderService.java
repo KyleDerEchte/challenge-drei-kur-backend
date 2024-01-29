@@ -1,17 +1,17 @@
 package de.nein.backend.service;
 
 import de.nein.backend.dto.OrderDTO;
-import de.nein.backend.entity.*;
+import de.nein.backend.entity.Customer;
+import de.nein.backend.entity.Order;
+import de.nein.backend.entity.OrderDetail;
+import de.nein.backend.entity.PaymentMethod;
 import de.nein.backend.repository.OrderRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,39 +19,34 @@ import java.util.Optional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerService customerService;
+    private final OrderDetailService orderDetailService;
+    private final PaymentMethodService paymentMethodService;
 
-    public List<Order> getOrders(){
-        return orderRepository.findAll();
+    public Order saveOrder(OrderDTO orderDTO) {
+        Order entity = convertToEntity(orderDTO);
+        this.orderRepository.save(entity);
+        entity.getOrderDetails().forEach(orderDetail -> orderDetail.getProduct().setPrice(0d));
+        return entity;
     }
 
-
-    public List<Order> getOrderByCustomerId(long id){
-        return orderRepository.findOrdersByCustomer_Id(id);
-    }
-
-    public Order saveOrder(OrderDTO orderDTO){
-        Customer customer;
-        Optional<Customer> optionalCustomer = customerService.getCustomerById(orderDTO.getCustomer().getId());
-        customer = optionalCustomer.orElseGet(() -> new Customer(0L,
-                orderDTO.getCustomer().getForename(),
-                orderDTO.getCustomer().getSurname(),
-                new Address(
-                        orderDTO.getCustomer().getId(),
-                        orderDTO.getCustomer().getStreet(),
-                        orderDTO.getCustomer().getHouseNumber(),
-                        orderDTO.getCustomer().getPlz(),
-                        orderDTO.getCustomer().getCity(),
-                        orderDTO.getCustomer().getCountry()
-                )
-        ));
-        Order order = new Order(
-                0L,
-                orderDTO.getOrderDetails(),
-                customer,
-                LocalDateTime.now(),
-                new OrderFulfillment(0L,"order-placed"),
-                orderDTO.getPaymentMethod()
-        );
-        return this.orderRepository.save(order);
+    private Order convertToEntity(OrderDTO orderDTO) {
+        Order order = new Order();
+        order.setId(orderDTO.getId());
+        order.setOrderDate(orderDTO.getLocalDateTime());
+        if (orderDTO.getCustomer() != null) {
+            Customer customer = customerService.convertToEntity(orderDTO.getCustomer());
+            order.setCustomer(customer);
+        }
+        if (orderDTO.getOrderDetails() != null) {
+            List<OrderDetail> orderDetails = orderDTO.getOrderDetails().stream()
+                    .map(orderDetailService::convertToEntity)
+                    .collect(Collectors.toList());
+            order.setOrderDetails(orderDetails);
+        }
+        if (orderDTO.getPaymentMethod() != null) {
+            PaymentMethod paymentMethod = paymentMethodService.convertToEntity(orderDTO.getPaymentMethod());
+            order.setPaymentMethod(paymentMethod);
+        }
+        return order;
     }
 }

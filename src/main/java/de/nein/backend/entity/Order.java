@@ -32,11 +32,11 @@ public class Order {
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "order_fulfillment_id")
     private OrderFulfillment orderFulfillment;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
 }
