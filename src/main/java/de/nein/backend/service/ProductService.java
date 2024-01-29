@@ -2,6 +2,7 @@ package de.nein.backend.service;
 
 import de.nein.backend.dto.ProductDTO;
 import de.nein.backend.entity.MaterialColor;
+import de.nein.backend.entity.MaterialType;
 import de.nein.backend.entity.Product;
 import de.nein.backend.entity.ProductType;
 import de.nein.backend.repository.ProductRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -17,6 +19,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductTypeService productTypeService;
     private final MaterialColorService materialColorService;
+    private final MaterialTypeService materialTypeService;
 
     public List<Product> getProducts() {
         return productRepository.findAll();
@@ -37,7 +40,12 @@ public class ProductService {
             MaterialColor color = materialColorService.convertToEntity(productDTO.getColor());
             product.setColor(color);
         }
-        // Behandle materialType Liste
+        if (productDTO.getMaterialType() != null){
+            product.setMaterialType(productDTO.getMaterialType()
+                    .stream()
+                    .map(materialTypeService::convertToEntity)
+                    .collect(Collectors.toList()));
+        }
         return product;
     }
 

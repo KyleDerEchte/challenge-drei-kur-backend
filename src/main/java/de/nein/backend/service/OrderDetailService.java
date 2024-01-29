@@ -20,7 +20,6 @@ public class OrderDetailService {
             Product product = productService.convertToEntity(orderDetailDTO.getProduct());
             orderDetail.setProduct(product);
         }
-        // Setze 'order' falls notwendig
         return orderDetail;
     }
 

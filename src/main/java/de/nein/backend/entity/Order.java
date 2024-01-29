@@ -21,7 +21,7 @@ public class Order {
     private Long id;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 
 

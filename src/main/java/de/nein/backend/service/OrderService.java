@@ -1,6 +1,7 @@
 package de.nein.backend.service;
 
 import de.nein.backend.dto.OrderDTO;
+import de.nein.backend.dto.OrderFulfillmentDTO;
 import de.nein.backend.entity.Customer;
 import de.nein.backend.entity.Order;
 import de.nein.backend.entity.OrderDetail;
@@ -21,15 +22,16 @@ public class OrderService {
     private final CustomerService customerService;
     private final OrderDetailService orderDetailService;
     private final PaymentMethodService paymentMethodService;
+    private final OrderFulfillmentService orderFulfillmentService;
 
     public Order saveOrder(OrderDTO orderDTO) {
         Order entity = convertToEntity(orderDTO);
         this.orderRepository.save(entity);
-        entity.getOrderDetails().forEach(orderDetail -> orderDetail.getProduct().setPrice(0d));
+        entity.getOrderDetails().forEach(orderDetail -> orderDetail.getProduct().setCosts(0d));
         return entity;
     }
 
-    private Order convertToEntity(OrderDTO orderDTO) {
+    public Order convertToEntity(OrderDTO orderDTO) {
         Order order = new Order();
         order.setId(orderDTO.getId());
         order.setOrderDate(orderDTO.getLocalDateTime());
@@ -47,6 +49,7 @@ public class OrderService {
             PaymentMethod paymentMethod = paymentMethodService.convertToEntity(orderDTO.getPaymentMethod());
             order.setPaymentMethod(paymentMethod);
         }
+        order.setOrderFulfillment(orderFulfillmentService.convertToEntity(orderDTO.getOrderFulfillment()));
         return order;
     }
 }

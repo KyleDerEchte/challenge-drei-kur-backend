@@ -16,4 +16,5 @@ public class OrderDTO {
     private List<OrderDetailDTO> orderDetails;
     private LocalDateTime localDateTime;
     private PaymentMethodDTO paymentMethod;
+    private OrderFulfillmentDTO orderFulfillment;
 }
