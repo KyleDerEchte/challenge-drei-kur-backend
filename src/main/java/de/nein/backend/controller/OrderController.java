@@ -1,5 +1,6 @@
 package de.nein.backend.controller;
 
+import de.nein.backend.dto.OrderDTO;
 import de.nein.backend.entity.Order;
 import de.nein.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +27,9 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getOrderByCustomerId(id), HttpStatus.OK);
     }
 
-    @PostMapping("/new")
-    public String createOrder(@RequestBody Order order){
-
-        orderService.saveOrder(order);
-        return "Order created.";
+    @PostMapping
+    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
+       return ResponseEntity.ok(this.orderService.saveOrder(orderDTO));
     }
 }
 
